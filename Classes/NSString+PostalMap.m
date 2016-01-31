@@ -5,6 +5,12 @@
 
 #import "NSString+PostalMap.h"
 
+@interface USStateAbbreviations : NSObject
+@end
+
+@implementation USStateAbbreviations
+@end
+
 @interface NSString (PostalMapPrivate)
 
 + (NSDictionary *)stateAbbreviationsMap;
@@ -20,7 +26,7 @@
     
     static dispatch_once_t onceTokenUS;
     dispatch_once(&onceTokenUS, ^{
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"USStateAbbreviations" ofType:@"plist"];
+        NSString *plistPath = [[NSBundle bundleForClass:[USStateAbbreviations class]] pathForResource:@"USStateAbbreviations" ofType:@"plist"];
         map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     });
     
@@ -33,7 +39,7 @@
     
     static dispatch_once_t onceTokenCA;
     dispatch_once(&onceTokenCA, ^{
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"CanadianPostalAbbreviations" ofType:@"plist"];
+        NSString *plistPath = [[NSBundle bundleForClass:[USStateAbbreviations class]] pathForResource:@"CanadianPostalAbbreviations" ofType:@"plist"];
         map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     });
     
